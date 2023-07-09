@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<style>
+    html {
+        height: 100vh;
+    }
+    body {
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: 1fr auto;
+    }
+    .footer {
+        grid-row-start: 2;
+        grid-row-end: 3;
+    }
+</style>
+<html lang="en-us"><head>
+  <meta charset="utf-8">
+  <title>Gltichfix</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="description" property="og:description" content="A Guide to Exploring the Darknet Safely and Responsibly">
+  <meta name="image" property="og:image" content="/">
+  <meta name="author" content="Shivanjan Chakravorty">
+  <meta name="generator" content="Hugo 0.115.1">
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/css/uikit.min.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="/css/style.min.css" integrity="" media="screen">
+  
+  <link rel="stylesheet" href="/css/syntax.min.css" integrity="" media="screen">
+
+  <script src="https://cdn.jsdelivr.net/npm/mailgo@0.9.14/dist/mailgo.min.js" defer></script>
+
+  <!--Favicon-->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+</head>
+<body class="blog">
+    <div class="wrapper"><div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
+    <nav class="uk-navbar-container uk-margin" uk-navbar="mode: click;" style="padding-right: 3rem">
+        <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav uk-visible@s">
+                
+                <li><a style="font-size: 18px; text-transform: none" href="/"> Home
+                        </a></li>
+
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a style="font-size: 18px; text-transform: none" href="/about">About</a></li>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="uk-active"><a style="font-size: 18px; text-transform:none"
+                        href="/blog">Blog</a></li>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a style="font-size: 18px; text-transform: none" href="/contact">Contact</a></li>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a style="font-size: 18px; text-transform: none" href="/portfolio">Portfolio</a></li>
+                
+                
+            </ul>
+
+            <a class="uk-navbar-toggle uk-hidden@s" uk-toggle="target: #sidenav" uk-navbar-toggle-icon href="#"></a>
+
+        </div>
+    </nav>
+</div>
+
+<div id="sidenav" uk-offcanvas="overlay: true">
+    <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+
+        <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
+            
+            <li><a style="font-size: 18px" href="https://Glitchfix.github.io/"> Home </a></li>
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <li><a style="font-size: 18px" href="/about">About</a></li>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <li class="uk-active"><a style="font-size: 18px" href="/blog">Blog</a></li>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <li><a style="font-size: 18px" href="/contact">Contact</a></li>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <li><a style="font-size: 18px" href="/portfolio">Portfolio</a></li>
+            
+            
+        </ul>
+
+    </div>
+</div>
+
+
+
+
+<style>
+  p {
+    margin: 0
+  }
+
+  .people-wrap {
+    display: inline-flex;
+    margin-top: 10px;
+  }
+
+  .people-image {
+    display: block;
+    border-radius: 50%;
+     
+  }
+
+  .people {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .name {
+    margin: auto;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #000;
+    font-family: Roboto, sans-serif;
+    line-height: 1.2;
+    margin-top: 2rem;
+  }
+
+  .content img {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom:30px;
+  }
+
+  p { margin-bottom: 1em; }
+
+  body p:last-child { margin-bottom: 0em; }
+
+  img.skills{
+    height: 80px;
+  }
+
+  @media only screen and (min-width: 960px) {
+    .content img{max-width:60vw; max-height:60vh}
+
+  .content img{
+      max-width:60vw;
+      max-height:60vh
+  }
+  }
+  .content{
+      width: 90vw;
+      max-width: 1200px
+  }
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+</style>
+
+
+<section>
+  <div class="uk-container uk-margin-large-bottom uk-margin-medium-top">
+    <h1 class="uk-text-center uk-heading-medium">Exploring the Darknet</h1>
+    <p class="uk-text-center uk-text-lead">A Guide to Exploring the Darknet Safely and Responsibly</p>
+    <p class="uk-text-center">Published on Apr 02, 2023</p>
+    <p class="uk-text-center">Reading time: 3 minutes.</p>
+    
+
+    <hr class="full-width">
+    
+
+    <div class="content">
+      <p>The darknet, also known as the deep web or hidden web, is a part of the internet that is not indexed by traditional search engines and can only be accessed through specialized tools such as the Tor browser. While the darknet is often associated with illegal activities such as drug sales and cybercrime, there are also legitimate and legal uses for it, such as anonymous communication, secure file sharing, and access to censored information. If you are interested in exploring the darknet for legitimate purposes, here are some guidelines for doing it safely and responsibly.</p>
+<h2 id="1-use-the-torbrowser">1. Use the Tor Browser</h2>
+<p>The Tor browser is the most common tool used to access the darknet, as it is designed to provide anonymity and privacy. The Tor network works by routing your internet traffic through a series of servers, or nodes, before reaching its final destination. This makes it difficult for anyone to trace your online activity back to you. Make sure to use the latest version of the Tor browser, and keep it up to date to ensure maximum security.</p>
+<h2 id="2-research-before-youexplore">2. Research before You Explore</h2>
+<p>Before you start exploring the darknet, it is important to do your research and understand the risks involved. Look for reputable sources of information and guidance on how to use the darknet safely and responsibly. Some good sources of information include the Tor Project website, Dark Web News, and Reddit&rsquo;s r/onions subreddit. These sources can provide useful information and resources about how to use the Tor browser, how to stay safe and secure online, and what to expect when exploring the darknet.</p>
+<h2 id="3-use-avpn">3. Use a VPN</h2>
+<p>Using a virtual private network (VPN) can provide an additional layer of security and privacy when accessing the darknet. A VPN encrypts your internet traffic and hides your IP address, making it difficult for anyone to trace your online activity back to you. Make sure to choose a reputable VPN provider that does not log your activity.</p>
+<h2 id="4-stick-to-reputable-websites">4. Stick to Reputable Websites</h2>
+<p>While there are many illegal websites on the darknet, there are also legitimate and legal websites that can provide useful information and resources. Stick to reputable websites, and avoid engaging in any illegal activities on the darknet. Some good sources of legitimate and legal websites include The Hidden Wiki, the Darknet Market subreddit, and the Torch search engine. These websites can help you find useful resources and information without putting yourself at risk.</p>
+<h2 id="5-stay-anonymous">5. Stay Anonymous</h2>
+<p>When using the darknet, it is important to maintain your anonymity and privacy. Avoid sharing personal information or identifying details, as this can compromise your anonymity and put you at risk. Use a pseudonym or handle when communicating online, and avoid revealing any identifying information that could be used to trace your online activity back to you.
+In conclusion, exploring the darknet can be risky and potentially illegal, but there are also legitimate and legal uses for it. By following these guidelines for doing it safely and responsibly, you can explore the darknet without putting yourself at risk. Remember to use good judgment, exercise caution, and avoid engaging in any illegal activities.
+Interesting links to explore</p>
+<h6 id="the-tor-project-httpswwwtorprojectorg">The Tor Project: <a href="https://www.torproject.org/">https://www.torproject.org/</a></h6>
+<h6 id="dark-web-news-httpsdarkwebnewscom">Dark Web News: <a href="https://darkwebnews.com/">https://darkwebnews.com/</a></h6>
+<h6 id="reddits-ronions-subreddit-httpswwwredditcomronions">Reddit&rsquo;s r/onions subreddit: <a href="https://www.reddit.com/r/onions/">https://www.reddit.com/r/onions/</a></h6>
+<h6 id="wireds-the-beginners-guide-to-the-darknet-httpswwwwiredcom201411the-beginners-guide-to-the-darknet">Wired&rsquo;s &ldquo;The Beginner&rsquo;s Guide to the Darknet&rdquo;: <a href="https://www.wired.com/2014/11/the-beginners-guide-to-the-darknet/">https://www.wired.com/2014/11/the-beginners-guide-to-the-darknet/</a></h6>
+<h6 id="pcmags-how-to-access-the-dark-web-httpswwwpcmagcomhow-tohow-to-access-the-dark-web">PCMag&rsquo;s &ldquo;How to Access the Dark Web&rdquo;: <a href="https://www.pcmag.com/how-to/how-to-access-the-dark-web">https://www.pcmag.com/how-to/how-to-access-the-dark-web</a></h6>
+<h6 id="lifehackers-how-to-safely-access-and-navigate-the-dark-web-httpslifehackercomhow-to-safely-access-and-navigate-the-dark-web-1824582745">Lifehacker&rsquo;s &ldquo;How to Safely Access and Navigate the Dark Web&rdquo;: <a href="https://lifehacker.com/how-to-safely-access-and-navigate-the-dark-web-1824582745">https://lifehacker.com/how-to-safely-access-and-navigate-the-dark-web-1824582745</a></h6>
+<h6 id="securitytrails-dark-web-vs-deep-web-whats-the-difference-httpssecuritytrailscomblogdark-web-vs-deep-web">SecurityTrails&rsquo; &ldquo;Dark Web vs Deep Web: What&rsquo;s The Difference?&rdquo;: <a href="https://securitytrails.com/blog/dark-web-vs-deep-web">https://securitytrails.com/blog/dark-web-vs-deep-web</a></h6>
+
+    </div>
+  </div>
+  </div>
+</section>
+
+
+
+    </div>
+<footer class="footer">
+  <div class="uk-container">
+
+    <div class="uk-grid-small uk-child-width-1-4@m uk-text-center uk-flex-center uk-margin-medium-bottom" uk-grid>
+      <div class="uk-margin-small-bottom">
+        <h5 class="uk-margin-small-bottom">Email</h5>
+        <a href="mailto:schakravorty846@gmail.com">schakravorty846@gmail.com</a>
+
+      </div>
+      <div>
+        <h5 class="uk-margin-small-bottom">Address</h5>
+          <div uk-lightbox>
+            <a href="" data-caption="Bangalore, India"
+               data-type="iframe">Bangalore, India</a>
+          </div>
+      </div>
+    </div>
+
+
+    <div class="footer-copyright uk-text-center" style="padding-bottom: 1rem">
+      <img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" style="height: 1.2em;
+  width: 1.2em;" alt="Creative Commons">
+      <img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" style="height: 1.2em;
+  width: 1.2em;" alt="CC-BY">
+      2023
+      Shivanjan Chakravorty
+    </div>
+  </div>
+</footer>
+
+
+<!-- JS Plugins -->
+
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit-icons.min.js"></script>
+
+</body>
+</html>

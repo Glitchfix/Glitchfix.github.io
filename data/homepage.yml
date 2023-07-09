@@ -1,0 +1,117 @@
+banner:
+  title: Hi! I’m Shivanjan
+social:
+  twitter: ""
+  linkedin: shivanjan
+  bitbucket: ""
+  github: Glitchfix
+  gitlab: Glitchfix
+  facebook: ""
+  instagram: ""
+  gmail: schakravorty846
+  hotmail: ""
+  telegram: ""
+  whatsapp: ""
+about:
+  enable: true
+  content: Your friendly neighbourhood Software Engineer
+  button:
+    btnText: Find out more
+    URL: "/about"
+skill:
+  enable: true
+  item:
+    - title: Python
+      logo: https://logos-download.com/wp-content/uploads/2016/10/Python_logo_icon.png
+      description: Details coming soon, contact me if you want to know more
+    - title: Pytorch
+      logo: https://cdn.icon-icons.com/icons2/2699/PNG/512/pytorch_logo_icon_169823.png
+      description: Details coming soon, contact me if you want to know more
+    - title: Tensorflow
+      logo: https://seeklogo.com/images/T/tensorflow-logo-AE5100E55E-seeklogo.com.png
+      description: Details coming soon, contact me if you want to know more
+    - title: NumPy
+      logo: https://avatars.githubusercontent.com/u/288276?s=200&v=4
+      description: Details coming soon, contact me if you want to know more
+    - title: spaCy
+      logo: https://s3-ap-south-1.amazonaws.com/av-blog-media/wp-content/uploads/2019/09/SpaCy_logo.svg_-300x107.png
+      description: Details coming soon, contact me if you want to know more
+    - title: LangChain
+      logo: https://styles.redditmedia.com/t5_7tpn6r/styles/communityIcon_vw08a423ptxa1.png
+      description: Details coming soon, contact me if you want to know more
+    - title: OpenCV
+      logo: https://opencv.org/wp-content/uploads/2020/07/OpenCV_logo_black-2-227x300.png
+      description: Details coming soon, contact me if you want to know more
+    - title: spaCy
+      logo: https://s3-ap-south-1.amazonaws.com/av-blog-media/wp-content/uploads/2019/09/SpaCy_logo.svg_-300x107.png
+      description: Details coming soon, contact me if you want to know more
+    - title: HuggingFace
+      logo: https://uptime-storage.s3.amazonaws.com/logos/d32f5c39b694f3e64d29fc2c9b988cdd.png
+      description: Details coming soon, contact me if you want to know more
+    - title: ChatGPT
+      logo: https://www.vinnytafuro.com/wp-content/uploads/2023/01/ChatGPT-Icon-Logo-PNG.png
+      description: Details coming soon, contact me if you want to know more
+    - title: Go
+      logo: https://sdtimes.com/wp-content/uploads/2018/02/golang.sh_-490x490.png
+      description: Details coming soon, contact me if you want to know more
+    - title: Kubernetes
+      logo: https://www.itopstimes.com/wp-content/uploads/2019/12/favicon-490x490.png
+      description: Details coming soon, contact me if you want to know more
+    - title: C++
+      logo: https://www.yhp.nz/wp-content/uploads/2016/01/c.png
+      description: Details coming soon, contact me if you want to know more
+    - title: C
+      logo: https://www.mycplus.com/mycplus/wp-content/uploads/2020/10/c.png
+      description: Details coming soon, contact me if you want to know more
+portfolio2:
+  enable: false
+  item:
+    - title: NA
+      image: NA
+      description: NA
+      link: "/portfolio/NA"
+      tools:
+        - next-dot-js
+        - tailwindcss
+        - vercel
+        - react
+experience:
+  enable: true
+  item:
+    - logo: https://upload.wikimedia.org/wikipedia/commons/6/61/Pure-storage-vector-logo.svg
+      title: Member of Technical Staff 3
+      company: Pure Storage
+      duration: October 2022 - Present
+    - logo: https://web.augnito.ai/Images/Logo_48X48.png
+      title: Backend Engineer
+      company: Augnito.ai
+      duration: January 2022 - September 2022
+    - logo: https://d1.awsstatic.com/events/aws-hosted-events/2019/APAC/Summit-2019/ASEAN/logo_cloudcover.fa25be5d4e93b1db67fc34e2f855334eed8dd64a.png
+      title: Developer
+      company: CloudCover
+      duration: October 2020 - January 2022
+    - logo: https://media.glassdoor.com/sqll/2938124/eastern-enterprise-squarelogo-1607004583055.png
+      title: Software Engineer
+      company: Oostelijke Onderneming LLC
+      duration: November 2019 - October 2020
+    - logo: https://logodix.com/logo/1918431.jpg
+      title: Project Trainee
+      company: Maharashtra Knowledge Corporation Limited
+      duration: July 2018 - August 2019
+    - logo: https://wiki.openstreetmap.org/w/images/thumb/1/11/Google_Summer_of_Code_2022.png/250px-Google_Summer_of_Code_2022.png
+      title: Student Developer
+      company: Google Summer of Code
+      duration: 2018
+publications:
+  enable: true
+  item:
+    - image: https://www.journal-fea.com/data/jfea/coversheet/logo_en.png
+      title: Prediction of Human Behavior with TOPSIS
+      description: The present paper proposes a new application of the prediction of human behavior using TOPSISas an appropriate tool for data optimization. Our hypothesis was that the analysis of thecandidates with this method was inﬂuenced by the change of their behavior. We found that thebehavior change could occur in more than one time span when the behavior of two candidateschanged simultaneously. One of the advantages of this study is that the pattern of the behaviorchange with time is predicted with this method. Another advantage is that the modiﬁcations inthe TOPSIS algorithm has made the predictions independent from the need of changing thefuzzy membership degrees of the candidates. This is the ﬁrst time that these modiﬁcations inthis technique with a new application including the numerical analysis of cognitive data arereported. Our results can be used in cognitive science, experimental psychology, cognitiveinformatics and artiﬁcial intelligence.
+      code_link: https://github.com/Glitchfix/TOPSIS-Python
+      pdf_link: http://www.journal-fea.com/article_145342.html
+    - image: https://cdn.asme.org/wwwasmeorg/media/ASMEMedia/Events/sponsors/Journal-Marine-Science-Engineering-Logo.jpg
+      title: Optimization of Machine Learning Algorithms for Proteomic Analysis Using TOPSIS
+      description: The present study focuses on a new application of the TOPSIS method for the optimization ofmachine learning algorithms, supervised neural networks (SNN), the quick classiﬁer (QC), andgenetic algorithm (GA) for proteomic analysis. The main hypotheses are that the change in theweights of alternatives could aect the ranking of algorithms. The obtained data conﬁrmed thishypothesis for their ranking. Moreover, adding labor as a cost criterion to the list of criteria didnot aect this ranking. This was because candidate 3 had better fuzzy membership degrees thanthe two other candidates concerning their criteria. This work showed the importance of thevalue of the fuzzy membership degrees of the cost criterion of the algorithms in their ranks. Thevalues of the fuzzy membership degrees of the algorithms used for proteomic analysis coulddetermine their priority according to their score dierences. One of the advantages of this studywas that the studied methods could be compared according to their characteristics. Anotheradvantage was that the obtained results could be related to the new ones after improving thesemethods. The results of this work could be applied in engineering, where the analysis ofproteins would be performed with these methods.
+      code_link: https://github.com/Glitchfix/TOPSIS-Python
+      pdf_link: https://essuir.sumdu.edu.ua/bitstream-download/123456789/90094/1/Javanbakht_jes_2_2022.pdf

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<style>
+    html {
+        height: 100vh;
+    }
+    body {
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: 1fr auto;
+    }
+    .footer {
+        grid-row-start: 2;
+        grid-row-end: 3;
+    }
+</style>
+<html lang="en-us"><head>
+  <meta charset="utf-8">
+  <title>Gltichfix</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="description" property="og:description" content="Understanding the Math Behind It">
+  <meta name="image" property="og:image" content="/">
+  <meta name="author" content="Shivanjan Chakravorty">
+  <meta name="generator" content="Hugo 0.115.1">
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/css/uikit.min.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="/css/style.min.css" integrity="" media="screen">
+  
+  <link rel="stylesheet" href="/css/syntax.min.css" integrity="" media="screen">
+
+  <script src="https://cdn.jsdelivr.net/npm/mailgo@0.9.14/dist/mailgo.min.js" defer></script>
+
+  <!--Favicon-->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+</head>
+<body class="blog">
+    <div class="wrapper"><div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
+    <nav class="uk-navbar-container uk-margin" uk-navbar="mode: click;" style="padding-right: 3rem">
+        <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav uk-visible@s">
+                
+                <li><a style="font-size: 18px; text-transform: none" href="/"> Home
+                        </a></li>
+
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a style="font-size: 18px; text-transform: none" href="/about">About</a></li>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="uk-active"><a style="font-size: 18px; text-transform:none"
+                        href="/blog">Blog</a></li>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a style="font-size: 18px; text-transform: none" href="/contact">Contact</a></li>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li><a style="font-size: 18px; text-transform: none" href="/portfolio">Portfolio</a></li>
+                
+                
+            </ul>
+
+            <a class="uk-navbar-toggle uk-hidden@s" uk-toggle="target: #sidenav" uk-navbar-toggle-icon href="#"></a>
+
+        </div>
+    </nav>
+</div>
+
+<div id="sidenav" uk-offcanvas="overlay: true">
+    <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+
+        <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
+            
+            <li><a style="font-size: 18px" href="https://Glitchfix.github.io/"> Home </a></li>
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <li><a style="font-size: 18px" href="/about">About</a></li>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <li class="uk-active"><a style="font-size: 18px" href="/blog">Blog</a></li>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <li><a style="font-size: 18px" href="/contact">Contact</a></li>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <li><a style="font-size: 18px" href="/portfolio">Portfolio</a></li>
+            
+            
+        </ul>
+
+    </div>
+</div>
+
+
+
+
+<style>
+  p {
+    margin: 0
+  }
+
+  .people-wrap {
+    display: inline-flex;
+    margin-top: 10px;
+  }
+
+  .people-image {
+    display: block;
+    border-radius: 50%;
+     
+  }
+
+  .people {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .name {
+    margin: auto;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #000;
+    font-family: Roboto, sans-serif;
+    line-height: 1.2;
+    margin-top: 2rem;
+  }
+
+  .content img {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom:30px;
+  }
+
+  p { margin-bottom: 1em; }
+
+  body p:last-child { margin-bottom: 0em; }
+
+  img.skills{
+    height: 80px;
+  }
+
+  @media only screen and (min-width: 960px) {
+    .content img{max-width:60vw; max-height:60vh}
+
+  .content img{
+      max-width:60vw;
+      max-height:60vh
+  }
+  }
+  .content{
+      width: 90vw;
+      max-width: 1200px
+  }
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+</style>
+
+
+<section>
+  <div class="uk-container uk-margin-large-bottom uk-margin-medium-top">
+    <h1 class="uk-text-center uk-heading-medium">Signal Attenuation and Recovery in 5GHz WiFi</h1>
+    <p class="uk-text-center uk-text-lead">Understanding the Math Behind It</p>
+    <p class="uk-text-center">Published on Apr 11, 2023</p>
+    <p class="uk-text-center">Reading time: 2 minutes.</p>
+    
+
+    <hr class="full-width">
+    
+
+    <div class="content">
+      <p>As more devices are being connected to WiFi networks, the demand for faster and more reliable connections is increasing. One way to improve the quality of WiFi signals is through the use of 5GHz frequencies. However, 5GHz WiFi signals have less range than 2.4GHz signals, and signal attenuation can be a challenge. In this article, we will explore the math behind signal attenuation and recovery in 5GHz WiFi.</p>
+<h1 id="understanding-signal-attenuation">Understanding Signal Attenuation</h1>
+<p>The strength of a WiFi signal is measured in decibels (dB). As the signal travels through space, it can be weakened by various factors, including distance, obstacles, and interference. This decrease in signal strength is known as attenuation, and it can be calculated using the following formula:</p>
+<p><code>Attenuation (dB) = 10 log (P1/P2)</code></p>
+<p>where P1 is the initial power level and P2 is the final power level.</p>
+<h1 id="techniques-for-recovering-attenuated-signals">Techniques for Recovering Attenuated Signals</h1>
+<p>There are several techniques that can be used to recover attenuated signals in 5GHz WiFi. Let’s explore some of these techniques and the math behind them.</p>
+<h1 id="multiple-antennas-mimo">Multiple Antennas (MIMO)</h1>
+<p>MIMO stands for multiple-input and multiple-output. This technique uses multiple antennas to transmit and receive signals, which can help to improve the range and reliability of the signal. The number of antennas used is represented by the variable “N”. The signal strength can be increased by a factor of N, which is represented by the variable “a”. The signal-to-noise ratio (SNR) can be improved by a factor of N, which is represented by the variable “b”. The data rate can also be increased by a factor of N, which is represented by the variable “c”. The overall improvement in signal quality can be represented by the following formula:</p>
+<p><code>Improvement = N^(a+b+c)</code></p>
+<h1 id="beamforming">Beamforming</h1>
+<p>Beamforming is a technique where the transmitter directs the signal towards the receiver by adjusting the phase and amplitude of the signal. The direction of the beam is represented by the variable “θ”. The signal strength can be increased by a factor of cos(θ), which is represented by the variable “a”. The signal-to-noise ratio (SNR) can be improved by a factor of cos(θ), which is represented by the variable “b”. The overall improvement in signal quality can be represented by the following formula:</p>
+<p><code>Improvement = cos(θ)^(a+b)</code></p>
+<h1 id="channel-bonding">Channel Bonding</h1>
+<p>Channel bonding is a technique where multiple channels are combined into a single, wider channel. The width of the channel is represented by the variable “W”. The data rate can be increased by a factor of W, which is represented by the variable “a”. The overall improvement in signal quality can be represented by the following formula:</p>
+<p><code>Improvement = W^a</code></p>
+<h1 id="conclusion">Conclusion</h1>
+<p>In conclusion, understanding the math behind signal attenuation and recovery in 5GHz WiFi can help to improve the quality and reliability of WiFi connections. Techniques such as MIMO, beamforming, and channel bonding can be used to recover attenuated signals and improve signal quality. By implementing these techniques, WiFi networks can provide faster and more reliable connections to users.</p>
+
+    </div>
+  </div>
+  </div>
+</section>
+
+
+
+    </div>
+<footer class="footer">
+  <div class="uk-container">
+
+    <div class="uk-grid-small uk-child-width-1-4@m uk-text-center uk-flex-center uk-margin-medium-bottom" uk-grid>
+      <div class="uk-margin-small-bottom">
+        <h5 class="uk-margin-small-bottom">Email</h5>
+        <a href="mailto:schakravorty846@gmail.com">schakravorty846@gmail.com</a>
+
+      </div>
+      <div>
+        <h5 class="uk-margin-small-bottom">Address</h5>
+          <div uk-lightbox>
+            <a href="" data-caption="Bangalore, India"
+               data-type="iframe">Bangalore, India</a>
+          </div>
+      </div>
+    </div>
+
+
+    <div class="footer-copyright uk-text-center" style="padding-bottom: 1rem">
+      <img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" style="height: 1.2em;
+  width: 1.2em;" alt="Creative Commons">
+      <img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" style="height: 1.2em;
+  width: 1.2em;" alt="CC-BY">
+      2023
+      Shivanjan Chakravorty
+    </div>
+  </div>
+</footer>
+
+
+<!-- JS Plugins -->
+
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit-icons.min.js"></script>
+
+</body>
+</html>
