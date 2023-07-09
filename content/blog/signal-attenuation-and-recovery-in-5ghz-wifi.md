@@ -1,6 +1,6 @@
 ---
 title: "Signal Attenuation and Recovery in 5GHz WiFi"
-date: 2023-04-11T12:14:34+06:00
+date: 2023-04-11T12:14:34+05:30
 description: "Understanding the Math Behind It"
 author: "Shivanjan Chakarvorty"
 type: "post"

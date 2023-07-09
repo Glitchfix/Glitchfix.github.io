@@ -2,56 +2,56 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blogs on Gltichfix</title>
-    <link>https://Glitchfix.github.io/blog/</link>
+    <link>Glitchfix.github.io/blog/</link>
     <description>Recent content in Blogs on Gltichfix</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Apr 2023 12:14:34 +0600</lastBuildDate><atom:link href="https://Glitchfix.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Apr 2023 12:14:34 +0530</lastBuildDate><atom:link href="Glitchfix.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>IPC: Shared memory</title>
-      <link>https://Glitchfix.github.io/blog/ipc/</link>
-      <pubDate>Thu, 20 Apr 2023 12:14:34 +0600</pubDate>
+      <link>Glitchfix.github.io/blog/ipc/</link>
+      <pubDate>Thu, 20 Apr 2023 12:14:34 +0530</pubDate>
       
-      <guid>https://Glitchfix.github.io/blog/ipc/</guid>
+      <guid>Glitchfix.github.io/blog/ipc/</guid>
       <description>Before we get started let&amp;rsquo;s get an insight on why IPC is needed. Inter Process Communication allows us to exchange information among two or more processes. This is important keep modularity intact. The communication between two processes can be established via two methods:
 Message Passing Shared memory In message passing you can communicate with processes using message queues, sockets or remote procedural calls. It&amp;rsquo;s all fun and games unless you require real time speed.</description>
     </item>
     
     <item>
       <title>Golang’s Efficient Garbage Collection Compared to Java</title>
-      <link>https://Glitchfix.github.io/blog/golangs-efficient-garbage-collection-compared-to-java/</link>
-      <pubDate>Sat, 15 Apr 2023 12:14:34 +0600</pubDate>
+      <link>Glitchfix.github.io/blog/golangs-efficient-garbage-collection-compared-to-java/</link>
+      <pubDate>Sat, 15 Apr 2023 12:14:34 +0530</pubDate>
       
-      <guid>https://Glitchfix.github.io/blog/golangs-efficient-garbage-collection-compared-to-java/</guid>
+      <guid>Glitchfix.github.io/blog/golangs-efficient-garbage-collection-compared-to-java/</guid>
       <description>As a developer, I&amp;rsquo;ve worked with both Golang and Java, and I&amp;rsquo;ve noticed that Golang&amp;rsquo;s garbage collection system is more efficient than Java&amp;rsquo;s. In this post, I&amp;rsquo;ll explain why that is the case.
 Garbage Collection in Java Java&amp;rsquo;s garbage collection is managed by the Java Virtual Machine (JVM). However, the JVM&amp;rsquo;s garbage collection process can be slow and have a noticeable impact on program execution. One issue is that garbage collection in Java requires the program to stop its execution until the garbage collection process is complete.</description>
     </item>
     
     <item>
       <title>Signal Attenuation and Recovery in 5GHz WiFi</title>
-      <link>https://Glitchfix.github.io/blog/signal-attenuation-and-recovery-in-5ghz-wifi/</link>
-      <pubDate>Tue, 11 Apr 2023 12:14:34 +0600</pubDate>
+      <link>Glitchfix.github.io/blog/signal-attenuation-and-recovery-in-5ghz-wifi/</link>
+      <pubDate>Tue, 11 Apr 2023 12:14:34 +0530</pubDate>
       
-      <guid>https://Glitchfix.github.io/blog/signal-attenuation-and-recovery-in-5ghz-wifi/</guid>
+      <guid>Glitchfix.github.io/blog/signal-attenuation-and-recovery-in-5ghz-wifi/</guid>
       <description>As more devices are being connected to WiFi networks, the demand for faster and more reliable connections is increasing. One way to improve the quality of WiFi signals is through the use of 5GHz frequencies. However, 5GHz WiFi signals have less range than 2.4GHz signals, and signal attenuation can be a challenge. In this article, we will explore the math behind signal attenuation and recovery in 5GHz WiFi.
 Understanding Signal Attenuation The strength of a WiFi signal is measured in decibels (dB).</description>
     </item>
     
     <item>
       <title>Exploring the Darknet</title>
-      <link>https://Glitchfix.github.io/blog/exploring-the-darknet/</link>
-      <pubDate>Sun, 02 Apr 2023 12:14:34 +0600</pubDate>
+      <link>Glitchfix.github.io/blog/exploring-the-darknet/</link>
+      <pubDate>Sun, 02 Apr 2023 12:14:34 +0530</pubDate>
       
-      <guid>https://Glitchfix.github.io/blog/exploring-the-darknet/</guid>
+      <guid>Glitchfix.github.io/blog/exploring-the-darknet/</guid>
       <description>The darknet, also known as the deep web or hidden web, is a part of the internet that is not indexed by traditional search engines and can only be accessed through specialized tools such as the Tor browser. While the darknet is often associated with illegal activities such as drug sales and cybercrime, there are also legitimate and legal uses for it, such as anonymous communication, secure file sharing, and access to censored information.</description>
     </item>
     
     <item>
       <title>Simulating Particle Motion in an Explosion</title>
-      <link>https://Glitchfix.github.io/blog/simulating-particle-motion-in-an-explosion/</link>
-      <pubDate>Sun, 02 Apr 2023 12:14:34 +0600</pubDate>
+      <link>Glitchfix.github.io/blog/simulating-particle-motion-in-an-explosion/</link>
+      <pubDate>Sun, 02 Apr 2023 12:14:34 +0530</pubDate>
       
-      <guid>https://Glitchfix.github.io/blog/simulating-particle-motion-in-an-explosion/</guid>
+      <guid>Glitchfix.github.io/blog/simulating-particle-motion-in-an-explosion/</guid>
       <description>In this post, we will explore the mathematical equations and methods involved in simulating the motion of particles in an explosion.
 Specifically, we will discuss how to define the initial conditions, calculate the forces acting on each particle, and use numerical integration methods to calculate the position and velocity of each particle over time.
 We will also discuss the challenges and considerations involved in simulating such a complex system.

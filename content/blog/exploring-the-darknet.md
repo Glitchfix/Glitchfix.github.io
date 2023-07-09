@@ -1,6 +1,6 @@
 ---
 title: "Exploring the Darknet"
-date: 2023-04-02T12:14:34+06:00
+date: 2023-04-02T12:14:34+05:30
 description: "A Guide to Exploring the Darknet Safely and Responsibly"
 author: "Shivanjan Chakarvorty"
 type: "post"

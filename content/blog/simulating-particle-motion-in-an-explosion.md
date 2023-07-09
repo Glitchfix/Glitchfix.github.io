@@ -1,6 +1,6 @@
 ---
 title: "Simulating Particle Motion in an Explosion"
-date: 2023-04-02T12:14:34+06:00
+date: 2023-04-02T12:14:34+05:30
 description: "A Mathematical Approach"
 author: "Shivanjan Chakarvorty"
 type: "post"

@@ -1,6 +1,6 @@
 ---
 title: "Golang’s Efficient Garbage Collection Compared to Java"
-date: 2023-04-15T12:14:34+06:00
+date: 2023-04-15T12:14:34+05:30
 description: "Comparing features of Golang"
 author: "Shivanjan Chakarvorty"
 type: "post"

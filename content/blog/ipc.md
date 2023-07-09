@@ -1,6 +1,6 @@
 ---
 title: "IPC: Shared memory"
-date: 2023-04-20T12:14:34+06:00
+date: 2023-04-20T12:14:34+05:30
 description: "concepts of C in Golang"
 author: "Shivanjan Chakarvorty"
 type: "post"
