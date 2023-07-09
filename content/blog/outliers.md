@@ -1,6 +1,6 @@
 ---
 title: "Outliers"
-date: 2023-07-10T12:00:00+05:30
+date: 2023-07-10T00:00:00+05:30
 description: "wandering mind, wandering thoughts"
 author: "Shivanjan Chakarvorty"
 type: "post"

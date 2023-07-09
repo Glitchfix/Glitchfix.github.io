@@ -6,7 +6,20 @@
     <description>Recent content in Blogs on Gltichfix</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Apr 2023 12:14:34 +0530</lastBuildDate><atom:link href="Glitchfix.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 Jul 2023 00:00:00 +0530</lastBuildDate><atom:link href="Glitchfix.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Outliers</title>
+      <link>Glitchfix.github.io/blog/outliers/</link>
+      <pubDate>Mon, 10 Jul 2023 00:00:00 +0530</pubDate>
+      
+      <guid>Glitchfix.github.io/blog/outliers/</guid>
+      <description>Anyone who lies outside a particular category is an outlier.
+An outlier can get treated as an outcast majority of their life.
+An outcast is someone who is not part of the group and will never be part of the process.
+Being an outcast will not make you an abomination, it can direct you in that direction though which can be dangerous.
+But sometimes the most beautiful things in nature are an abomination.</description>
+    </item>
+    
     <item>
       <title>IPC: Shared memory</title>
       <link>Glitchfix.github.io/blog/ipc/</link>
