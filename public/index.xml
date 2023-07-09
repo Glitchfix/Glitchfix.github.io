@@ -60,6 +60,16 @@ Understanding Signal Attenuation The strength of a WiFi signal is measured in de
     </item>
     
     <item>
+      <title>Hacking-Proof: The Security Features of Golang</title>
+      <link>Glitchfix.github.io/blog/hackproof-golang/</link>
+      <pubDate>Sun, 02 Apr 2023 12:14:34 +0530</pubDate>
+      
+      <guid>Glitchfix.github.io/blog/hackproof-golang/</guid>
+      <description>Golang, or Go, is a programming language that is known for its simplicity, concurrency, and efficiency. However, Golang is also designed with security in mind, and includes several features that make it a secure choice for building applications.
+1. Memory Safety Golang includes built-in memory safety features that help prevent common security vulnerabilities such as buffer overflows and memory leaks. Golang&amp;rsquo;s garbage collector automatically manages memory allocation and deallocation, reducing the likelihood of these types of vulnerabilities.</description>
+    </item>
+    
+    <item>
       <title>Simulating Particle Motion in an Explosion</title>
       <link>Glitchfix.github.io/blog/simulating-particle-motion-in-an-explosion/</link>
       <pubDate>Sun, 02 Apr 2023 12:14:34 +0530</pubDate>
