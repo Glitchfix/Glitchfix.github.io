@@ -102,6 +102,13 @@ experience:
       title: Student Developer
       company: Google Summer of Code
       duration: 2018
+education:
+  enable: true
+  item:
+    - title: B.Tech Computer Science Engineering
+      year: 2014 - 2018
+      academy: Biju Patnaik University of Technology
+      image: https://upload.wikimedia.org/wikipedia/en/thumb/e/ec/Official_logo_of_Biju_Patanaik_University_of_Technology.png/180px-Official_logo_of_Biju_Patanaik_University_of_Technology.png
 publications:
   enable: true
   item:
@@ -114,4 +121,4 @@ publications:
       title: Optimization of Machine Learning Algorithms for Proteomic Analysis Using TOPSIS
       description: The present study focuses on a new application of the TOPSIS method for the optimization ofmachine learning algorithms, supervised neural networks (SNN), the quick classiﬁer (QC), andgenetic algorithm (GA) for proteomic analysis. The main hypotheses are that the change in theweights of alternatives could aect the ranking of algorithms. The obtained data conﬁrmed thishypothesis for their ranking. Moreover, adding labor as a cost criterion to the list of criteria didnot aect this ranking. This was because candidate 3 had better fuzzy membership degrees thanthe two other candidates concerning their criteria. This work showed the importance of thevalue of the fuzzy membership degrees of the cost criterion of the algorithms in their ranks. Thevalues of the fuzzy membership degrees of the algorithms used for proteomic analysis coulddetermine their priority according to their score dierences. One of the advantages of this studywas that the studied methods could be compared according to their characteristics. Anotheradvantage was that the obtained results could be related to the new ones after improving thesemethods. The results of this work could be applied in engineering, where the analysis ofproteins would be performed with these methods.
       code_link: https://github.com/Glitchfix/TOPSIS-Python
-      pdf_link: https://essuir.sumdu.edu.ua/bitstream-download/123456789/90094/1/Javanbakht_jes_2_2022.pdf
+      pdf_link: https://jes.sumdu.edu.ua/optimization-of-machine-learning-algorithms-for-proteomic-analysis-using-topsis/
