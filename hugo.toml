@@ -3,6 +3,8 @@ languageCode = 'en-us'
 title = 'Gltichfix'
 theme = ["hugo-developer-portfolio"]
 
+googleAnalytics = 'G-GPBS5WVPT5'
+
 [params]
 home = "Home" # What you want the homepage to show up as in the menu bar
 # Meta data
