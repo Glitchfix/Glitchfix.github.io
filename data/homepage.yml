@@ -23,46 +23,113 @@ skill:
   item:
     - title: Python
       logo: https://logos-download.com/wp-content/uploads/2016/10/Python_logo_icon.png
-      description: Details coming soon, contact me if you want to know more
+      description: |
+        ● Developed applications Deep learning, Natural Language Processing </br>
+        ● Built backends using Flask, Django, Tornado. </br>
+        ● Opensource hacks for Kombu, Celery, CloudCustodian </br>
+        ● eBPF </br>
+        ● AMQP (RabbitMQ, CloudMQ, KubeMQ) </br>
+        ● MQTT </br>
+        ● gRPC </br>
     - title: Pytorch
       logo: https://cdn.icon-icons.com/icons2/2699/PNG/512/pytorch_logo_icon_169823.png
-      description: Details coming soon, contact me if you want to know more
+      description: |
+        ● Training and modifying Tacotron 2 </br>
+        ● T5 transformer </br>
+        ● m2m100 </br>
     - title: Tensorflow
       logo: https://seeklogo.com/images/T/tensorflow-logo-AE5100E55E-seeklogo.com.png
-      description: Details coming soon, contact me if you want to know more
+      description: |
+        ● Hand tracking </br>
+        ● Object detection </br>
+        ● Face recognition </br>
+        ● Pose estimation </br>
     - title: NumPy
       logo: https://avatars.githubusercontent.com/u/288276?s=200&v=4
-      description: Details coming soon, contact me if you want to know more
+      description: |
+        ● Statistical model </br>
+        ● TOPSIS, MCDMA, Optimization </br>
     - title: spaCy
       logo: https://s3-ap-south-1.amazonaws.com/av-blog-media/wp-content/uploads/2019/09/SpaCy_logo.svg_-300x107.png
-      description: Details coming soon, contact me if you want to know more
+      description: |
+        ● NER, Semantic Analysis, Sentiment analysis </br>
+        ● DistilBERT, RoBERT </br>
     - title: LangChain
       logo: https://styles.redditmedia.com/t5_7tpn6r/styles/communityIcon_vw08a423ptxa1.png
-      description: Details coming soon, contact me if you want to know more
+      description: |
+        ● Intent driven chatbot integration with OpenAI </br>
     - title: OpenCV
       logo: https://opencv.org/wp-content/uploads/2020/07/OpenCV_logo_black-2-227x300.png
-      description: Details coming soon, contact me if you want to know more
-    - title: spaCy
-      logo: https://s3-ap-south-1.amazonaws.com/av-blog-media/wp-content/uploads/2019/09/SpaCy_logo.svg_-300x107.png
-      description: Details coming soon, contact me if you want to know more
+      description: |
+        ● Face recognition </br>
+        ● Object detection </br>
+        ● Self driving car </br>
+        ● Shipping container defect detection </br>
     - title: HuggingFace
       logo: https://uptime-storage.s3.amazonaws.com/logos/d32f5c39b694f3e64d29fc2c9b988cdd.png
-      description: Details coming soon, contact me if you want to know more
+      description: |
+        ● Depth Estimation </br>
+        ● Image Classification </br>
+        ● Object Detection </br>
+        ● Image Segmentation </br>
+        ● Image-to-Image </br>
+        ● Unconditional Image Generation </br>
+        ● Video Classification </br>
+        ● Zero-Shot Image Classification </br>
+        ● Text-to-Speech </br>
+        ● Text-to-Image </br>
+        ● Text-to-Video </br>
+        ● Voice Activity Detection </br>
+        ● Text Classification </br>
+        ● Token Classification </br>
+        ● Table Question Answering </br>
+        ● Question Answering </br>
+        ● Zero-Shot Classification </br>
+        ● Translation </br>
     - title: ChatGPT
       logo: https://www.vinnytafuro.com/wp-content/uploads/2023/01/ChatGPT-Icon-Logo-PNG.png
-      description: Details coming soon, contact me if you want to know more
+      description: |
+        ● Intent driven chatbot </br>
+        ● Customer support bot </br>
     - title: Go
       logo: https://sdtimes.com/wp-content/uploads/2018/02/golang.sh_-490x490.png
-      description: Details coming soon, contact me if you want to know more
+      description: |
+        ● Built backends using Gin, Gorilla mux, echo, chi. </br>
+        ● Built networking tools. </br>
+        ● Built security tools to scan malware and perform compliances </br>
+        ● Built tools to reverse engineer container images </br>
+        ● Secure storage for AI models </br>
+        ● Opensource hacks for libopenstorage, Google/ubbagent </br>
+        ● AMQP (RabbitMQ, CloudMQ, KubeMQ) </br>
+        ● MQTT </br>
+        ● gRPC </br>
+        ● CGo </br>
     - title: Kubernetes
       logo: https://www.itopstimes.com/wp-content/uploads/2019/12/favicon-490x490.png
-      description: Details coming soon, contact me if you want to know more
+      description: |
+        ● Multicloud deployment </br>
+        ● Container storage interface </br>
+        ● Container networking interface </br>
+        ● Intra and inter cloud setup </br>
+        ● Security and compliance </br>
+        ● Baremetal setup from scratch </br>
+        ● Proxy and VPN setups </br>
+        ● Fault resilient deployments </br>
+        ● Custom kubelet plugins and hacks </br>
     - title: C++
       logo: https://www.yhp.nz/wp-content/uploads/2016/01/c.png
-      description: Details coming soon, contact me if you want to know more
+      description: |
+        ● BOOST libraries </br>
+        ● WebRTC </br>
+        ● gRPC </br>
+        ● OpenCV </br>
     - title: C
       logo: https://www.mycplus.com/mycplus/wp-content/uploads/2020/10/c.png
-      description: Details coming soon, contact me if you want to know more
+      description: |
+        ● libAV </br>
+        ● WebRTC </br>
+        ● Linux kernel </br>
+        ● eBPF </br>
 portfolio2:
   enable: false
   item:
