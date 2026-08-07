@@ -250,3 +250,20 @@ article tbody tr:last-child td { border-bottom:0; }
   html { scroll-behavior:auto; }
 }
 figure.manim .frame video { display:block; width:100%; height:auto; }
+
+/* home background: sparse drifting point field, behind everything */
+#bg {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,.9) 0%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.15) 80%, transparent 100%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,.9) 0%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.15) 80%, transparent 100%);
+}
+
+/* ---------- home hero: geodesic wireframe, depth-cued, spring-follow ---------- */
+.intro { position: relative; }
+.hero3d {
+  position: absolute; right: -0.5rem; top: -4.2rem; transform: none;
+  width: clamp(200px, 21vw, 265px); aspect-ratio: 1;
+  pointer-events: none; z-index: -1;
+}
+@media (max-width: 1100px) { .hero3d { opacity: .35; } }
+@media (max-width: 700px)  { .hero3d { display: none; } }
