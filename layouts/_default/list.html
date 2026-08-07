@@ -1,0 +1,7 @@
+{{ define "main" }}
+<div class="listhead">
+  <h1 class="pagetitle">{{ .Title }}<span class="dot">.</span></h1>
+  {{ with .Content }}{{ . }}{{ end }}
+</div>
+{{ partial "writing-list.html" . }}
+{{ end }}

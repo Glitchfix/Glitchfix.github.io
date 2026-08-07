@@ -1,0 +1,12 @@
+<footer class="site">
+  <span>&copy; {{ now.Year }} {{ site.Params.author | lower }}</span>
+  <span>$ sed 's/glitch/fix/g' &middot; <a href="/index.xml">rss</a></span>
+</footer>
+<script>
+  document.getElementById('themebtn').addEventListener('click', function () {
+    var r = document.documentElement;
+    var next = r.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    r.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+</script>

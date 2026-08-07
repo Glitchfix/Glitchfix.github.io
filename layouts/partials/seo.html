@@ -1,0 +1,63 @@
+{{- $og := printf "%sog-card.png" site.BaseURL -}}
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:image" content="{{ $og }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ .Title }}">
+<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+<meta name="twitter:image" content="{{ $og }}">
+{{- with .Params.keywords }}
+<meta name="keywords" content="{{ delimit . ", " }}">
+{{- end }}
+{{- if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": {{ site.Title | jsonify }},
+      "url": {{ site.BaseURL | jsonify }},
+      "description": {{ site.Params.description | jsonify }}
+    },
+    {
+      "@type": "Person",
+      "name": {{ site.Params.author | jsonify }},
+      "url": {{ site.BaseURL | jsonify }},
+      "email": {{ printf "mailto:%s" site.Params.email | jsonify }},
+      "jobTitle": "Software engineer: AI inference, GPU simulation, 3D reconstruction, robot learning",
+      "sameAs": [
+        {{ site.Params.github | jsonify }},
+        {{ site.Params.linkedin | jsonify }},
+        {{ site.Params.researchgate | jsonify }},
+        "https://gitlab.com/Glitchfix"
+      ]
+    }
+  ]
+}
+</script>
+{{- else if and .IsPage (eq .Section "blog") }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ .Title | jsonify }},
+  "description": {{ .Description | jsonify }},
+  "url": {{ .Permalink | jsonify }},
+  "datePublished": {{ .Date.Format "2006-01-02" | jsonify }},
+  "dateModified": {{ .Lastmod.Format "2006-01-02" | jsonify }},
+  "image": {{ $og | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": {{ site.Params.author | jsonify }},
+    "url": {{ site.BaseURL | jsonify }}
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": {{ site.Params.author | jsonify }}
+  },
+  "mainEntityOfPage": {{ .Permalink | jsonify }}
+}
+</script>
+{{- end }}

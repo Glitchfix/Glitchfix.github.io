@@ -1,0 +1,18 @@
+{{- $src := .Get "src" -}}
+{{- $r := .Page.Resources.GetMatch $src -}}
+{{- $url := cond (ne $r nil) $r.RelPermalink $src -}}
+<figure class="manim">
+  <div class="frame">
+    {{- if strings.HasSuffix $src ".mp4" -}}
+    <video autoplay loop muted playsinline preload="metadata" aria-label="{{ .Get "alt" }}">
+      <source src="{{ $url }}" type="video/mp4">
+    </video>
+    {{- else -}}
+    <img src="{{ $url }}" alt="{{ .Get "alt" }}" loading="lazy">
+    {{- end -}}
+  </div>
+  <figcaption>
+    <span class="fignum">fig {{ .Get "num" }}</span> &middot; {{ .Get "caption" | markdownify }}
+    &middot; rendered with manim{{ with .Get "scene" }} &middot; <a href="https://github.com/Glitchfix/Glitchfix.github.io/blob/master/{{ . }}">scene source</a>{{ end }}
+  </figcaption>
+</figure>

@@ -1,0 +1,10 @@
+<header class="site">
+  <a class="logotype" href="{{ site.Home.RelPermalink }}">glitch<span class="fix">fix</span></a>
+  <nav class="site">
+    {{ $current := . }}
+    {{ range site.Menus.main }}
+    <a href="{{ .URL }}"{{ if or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) (and (eq .URL "/blog/") (eq $current.Section "blog")) }} class="here"{{ end }}>{{ .Name }}</a>
+    {{ end }}
+    <button class="themebtn" id="themebtn" aria-label="toggle theme">&#9680;</button>
+  </nav>
+</header>

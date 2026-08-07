@@ -1,0 +1,23 @@
+{{ $posts := where site.RegularPages "Section" "blog" }}
+{{ $newest := index $posts 0 }}
+<section class="list">
+  <p class="sechead">Writing</p>
+  {{ range $posts.GroupByDate "2006" }}
+  <div class="year-group">
+    <div class="year">{{ .Key }}</div>
+    <div class="entries">
+      {{ range .Pages }}
+      <a class="entry" href="{{ .RelPermalink }}">
+        <div class="t">{{ if eq . $newest }}<span class="new-dot"></span>{{ end }}{{ .Title }}</div>
+        {{ with .Description }}<div class="d">{{ . }}</div>{{ end }}
+        <div class="meta">
+          <span>{{ .Date.Format "02 Jan 2006" | lower }}</span>
+          {{ with .Params.figures }}<span>{{ . }} figure{{ if ne . 1 }}s{{ end }}</span>{{ end }}
+          {{ with .Params.anchor }}<span class="anchor">{{ . }}</span>{{ end }}
+        </div>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+</section>

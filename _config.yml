@@ -1,0 +1,3 @@
+# Placeholder config for the legacy branch-based Pages builder.
+# This site is built and published by .github/workflows/hugo.yaml.
+theme: site-theme-placeholder

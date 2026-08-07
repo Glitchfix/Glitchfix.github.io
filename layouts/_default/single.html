@@ -1,0 +1,15 @@
+{{ define "main" }}
+<article>
+  <p class="kicker">
+    {{ .Date.Format "02 Jan 2006" }} &middot; {{ .ReadingTime }} min
+    {{- with .Params.anchor }} &middot; {{ if $.Params.anchor_url }}<a href="{{ $.Params.anchor_url }}">{{ . }}</a>{{ else }}{{ . }}{{ end }}{{ end }}
+  </p>
+  <h1>{{ .Title }}</h1>
+  {{ with .Description }}<p class="byline">{{ . }}</p>{{ end }}
+  {{ .Content }}
+  <nav class="postnav">
+    {{ with .PrevInSection }}<a href="{{ .RelPermalink }}"><span class="lbl">&larr; older</span>{{ .Title }}</a>{{ else }}<span></span>{{ end }}
+    {{ with .NextInSection }}<a class="right" href="{{ .RelPermalink }}"><span class="lbl">newer &rarr;</span>{{ .Title }}</a>{{ end }}
+  </nav>
+</article>
+{{ end }}

@@ -1,60 +1,39 @@
-baseURL = 'Glitchfix.github.io/'
+baseURL = 'https://glitchfix.github.io/'
 languageCode = 'en-us'
-title = 'Gltichfix'
-theme = ["hugo-developer-portfolio"]
+title = 'glitchfix'
+enableRobotsTXT = true
+timeZone = 'Asia/Taipei'
+disableKinds = ['taxonomy', 'term']
 
-googleAnalytics = 'G-GPBS5WVPT5'
+[services.googleAnalytics]
+ID = 'G-GPBS5WVPT5'
 
 [params]
-home = "Home" # What you want the homepage to show up as in the menu bar
-# Meta data
-description = "Shivanjan is a Software Engineer with intereset in AI, ML and robust backends. He also keeps interest in Hardwaare hacking and understanding the Linux kernel"
-author = "Shivanjan Chakravorty"
+description = 'Shivanjan Chakravorty writes about AI inference, GPU simulation, 3D reconstruction, and robot learning.'
+author = 'Shivanjan Chakravorty'
+email = 'schakravorty846@gmail.com'
+github = 'https://github.com/Glitchfix'
+linkedin = 'https://www.linkedin.com/in/shivanjan'
+researchgate = 'https://www.researchgate.net/profile/Shivanjan-Chakravorty'
+eyebrow = 'AI inference · GPU simulation · 3D reconstruction · robot learning'
 
+[permalinks]
+blog = '/blog/:contentbasename/'
 
-  [params.contact]
-#   formAction = "https://formspree.io/<Insert code>" # Add your formspree URL here to get emails
+[markup.goldmark.renderer]
+unsafe = true
 
-  # This contains the contact information for the footer
-  [params.footer]
-  email = "schakravorty846@gmail.com"
-  address = "Bangalore, India"
-#   googlemaps = "https://www.google.com/maps/embed/v1/place?q=place_id:ChIJwbHYJaUqfEgRK0Ui9dVGimc&key=AIzaSyAE_4rVAKux_DSPcb_OdSRDaovtPOSk_3U"
+[markup.highlight]
+noClasses = false
+codeFences = true
 
-[params.plugins]
-  # CSS Plugins
-  [[params.plugins.css]]
-  URL = "https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/css/uikit.min.css"
-  # JS Plugins
-  [[params.plugins.js]]
-  URL = "https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit.min.js"
-  [[params.plugins.js]]
-  URL = "https://cdn.jsdelivr.net/npm/uikit@3.2.6/dist/js/uikit-icons.min.js"
+[[menus.main]]
+name = 'writing'
+url = '/blog/'
+weight = 1
 
-# navigation
-[menu]
-  # [[menu.main]]
-  # name = "Portfolio"
-  # URL = "portfolio"
-  # weight=1
+[[menus.main]]
+name = 'about'
+url = '/about/'
+weight = 2
 
-
-  [[menu.main]]
-  name = "Blog"
-  URL = "blog"
-  weight=1
-
-  [[menu.main]]
-  name = "AI"
-  URL = "ai"
-  weight=2
-
-  [[menu.main]]
-  name = "About"
-  URL = "about"
-  weight=3
-
-  # [[menu.main]]
-  # name = "Contact"
-  # URL = "contact"
-  

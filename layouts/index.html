@@ -1,0 +1,14 @@
+{{ define "main" }}
+<div class="intro">
+  <p class="eyebrow">{{ site.Params.eyebrow }}</p>
+  <h1>{{ site.Params.author }}<span class="dot">.</span></h1>
+  {{ .Content }}
+  <div class="links mono">
+    <a href="{{ site.Params.github }}">github/Glitchfix</a>
+    <a href="{{ site.Params.linkedin }}">linkedin</a>
+    <a href="/index.xml">rss</a>
+    <a href="mailto:{{ site.Params.email }}">email</a>
+  </div>
+</div>
+{{ partial "writing-list.html" . }}
+{{ end }}
