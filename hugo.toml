@@ -9,13 +9,12 @@ disableKinds = ['taxonomy', 'term']
 ID = 'G-GPBS5WVPT5'
 
 [params]
-description = 'Shivanjan Chakravorty writes about AI inference, GPU simulation, 3D reconstruction, and robot learning.'
+description = 'Notes by Shivanjan Chakravorty.'
 author = 'Shivanjan Chakravorty'
 email = 'schakravorty846@gmail.com'
 github = 'https://github.com/Glitchfix'
 linkedin = 'https://www.linkedin.com/in/shivanjan'
 researchgate = 'https://www.researchgate.net/profile/Shivanjan-Chakravorty'
-eyebrow = 'AI inference · GPU simulation · 3D reconstruction · robot learning'
 
 [permalinks]
 blog = '/blog/:contentbasename/'

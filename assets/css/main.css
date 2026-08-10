@@ -47,7 +47,7 @@
 }
 
 * { box-sizing:border-box; }
-html { scroll-behavior:smooth; }
+html { scroll-behavior:smooth; overflow-x:clip; }
 body {
   margin:0; background:var(--ground); color:var(--ink);
   font-family:var(--serif); font-size:18px; line-height:1.6;
@@ -86,10 +86,6 @@ footer.site a:hover { color:var(--accent); }
 
 /* ---------- home intro ---------- */
 .intro { padding:3rem 0 2.4rem; border-bottom:1px solid var(--rule); }
-.eyebrow {
-  font-family:var(--mono); font-size:.7rem; letter-spacing:.16em;
-  text-transform:uppercase; color:var(--muted); margin:0 0 1.3rem;
-}
 .intro h1 {
   font-optical-sizing:auto; font-size:clamp(2.6rem,7vw,3.9rem); line-height:1.02;
   margin:0 0 1.5rem; font-weight:500; letter-spacing:-.028em; text-wrap:balance;
@@ -261,9 +257,8 @@ figure.manim .frame video { display:block; width:100%; height:auto; }
 /* ---------- home hero: geodesic wireframe, depth-cued, spring-follow ---------- */
 .intro { position: relative; }
 .hero3d {
-  position: absolute; right: -0.5rem; top: -4.2rem; transform: none;
-  width: clamp(200px, 21vw, 265px); aspect-ratio: 1;
+  position: absolute; left: 50%; transform: translateX(-50%);
+  width: 100vw; top: -4.6rem; height: calc(100% + 7.4rem);
   pointer-events: none; z-index: -1;
 }
-@media (max-width: 1100px) { .hero3d { opacity: .35; } }
-@media (max-width: 700px)  { .hero3d { display: none; } }
+@media (max-width: 700px) { .hero3d { opacity: .6; } }

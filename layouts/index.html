@@ -6,7 +6,7 @@
   (function () {
     var c = document.getElementById('hero3d'), x = c.getContext('2d');
     var REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var DPR = Math.min(devicePixelRatio || 1, 2), SIZE = 0, ink, accent;
+    var DPR = Math.min(devicePixelRatio || 1, 2), CW = 0, CH = 0, ink, accent;
     var P = 1200;
 
     function palette() {
@@ -277,8 +277,8 @@
       tp = Math.max(-.35, Math.min(.35, (e.clientY-(r.top+r.height/2))/innerHeight*.8));
     });
     function size() {
-      var r = c.getBoundingClientRect(); SIZE = r.width;
-      c.width = SIZE*DPR; c.height = SIZE*DPR; x.setTransform(DPR,0,0,DPR,0,0);
+      var r = c.getBoundingClientRect(); CW = r.width; CH = r.height;
+      c.width = CW*DPR; c.height = CH*DPR; x.setTransform(DPR,0,0,DPR,0,0);
     }
     var born = performance.now(), last = born, raf;
 
@@ -304,7 +304,7 @@
       var Y = yawAcc + sy;
       var Pit = .30 + .07*Math.sin(now/13000) + sp;
       var cosY=Math.cos(Y),sinY=Math.sin(Y),cosP=Math.cos(Pit),sinP=Math.sin(Pit);
-      var R = SIZE*.30, cx = SIZE/2, cy = SIZE/2;
+      var R = Math.min(CW, CH)*.40, cx = CW/2, cy = CH/2;
 
       var flyU = isFly ? Math.max(0,(holdT-2.2)/2.6) : 0;
       var dart = isFly ? Math.max(0, Math.min(1, (holdT-1.5)/.35)) : 0;
@@ -366,7 +366,7 @@
         proj[i2] = [cx + x1*R*f2, cy - y2b*R*f2];
         depth[i2] = z2b;
       }
-      x.clearRect(0,0,SIZE,SIZE); x.lineCap='round';
+      x.clearRect(0,0,CW,CH); x.lineCap='round';
       var fadeAll = isFly ? Math.max(0, 1-Math.max(0,(holdT-4.6)/1.0)) : 1;
       var edgeDim = (isLidar && !inMorph) ? .35 : 1;
 
@@ -436,14 +436,18 @@
       else { last = performance.now(); raf = requestAnimationFrame(frame); }
     });
     new MutationObserver(palette).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
-    palette(); size();
-    if (REDUCED) { born = performance.now()-16000; frame(performance.now()); }
-    else raf = requestAnimationFrame(frame);
+    palette();
+    requestAnimationFrame(function () {          /* box depends on late layout */
+      size();
+      if (REDUCED) { born = performance.now()-16000; frame(performance.now()); }
+      else raf = requestAnimationFrame(frame);
+    });
+    if (document.fonts) document.fonts.ready.then(function () {
+      size(); if (REDUCED) frame(performance.now());
+    });
   })();
   </script>
-  <p class="eyebrow">{{ site.Params.eyebrow }}</p>
   <h1>{{ site.Params.author }}<span class="dot">.</span></h1>
-  {{ .Content }}
   <div class="links mono">
     <a href="{{ site.Params.github }}">github/Glitchfix</a>
     <a href="{{ site.Params.linkedin }}">linkedin</a>
