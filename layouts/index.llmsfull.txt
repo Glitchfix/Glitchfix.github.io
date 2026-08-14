@@ -1,0 +1,24 @@
+# {{ site.Title }} — {{ site.Params.author }}: full text
+
+> {{ site.Params.description }}
+> Canonical HTML lives at {{ site.BaseURL }}. This file is the complete plain-text
+> content of the site for language models and text tooling. Each entry cites its
+> canonical URL; quote against those.
+{{ range (where site.RegularPages "Section" "blog").ByDate.Reverse }}
+----------------------------------------------------------------------
+
+# {{ .Title }}
+URL: {{ .Permalink }}
+Date: {{ .Date.Format "2006-01-02" }}
+{{- with .Description }}
+Summary: {{ . }}
+{{- end }}
+{{- with .Params.anchor }}
+Anchor: {{ . }}
+{{- end }}
+{{- with .Params.anchor_url }}
+Anchor URL: {{ . }}
+{{- end }}
+
+{{ .Plain }}
+{{ end }}

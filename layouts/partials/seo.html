@@ -17,16 +17,33 @@
   "@graph": [
     {
       "@type": "WebSite",
+      "@id": {{ printf "%s#website" site.BaseURL | jsonify }},
       "name": {{ site.Title | jsonify }},
       "url": {{ site.BaseURL | jsonify }},
-      "description": {{ site.Params.description | jsonify }}
+      "description": {{ site.Params.description | jsonify }},
+      "publisher": { "@id": {{ printf "%s#person" site.BaseURL | jsonify }} },
+      "inLanguage": "en"
     },
     {
       "@type": "Person",
+      "@id": {{ printf "%s#person" site.BaseURL | jsonify }},
       "name": {{ site.Params.author | jsonify }},
       "url": {{ site.BaseURL | jsonify }},
       "email": {{ printf "mailto:%s" site.Params.email | jsonify }},
       "jobTitle": "Performance engineer",
+      "description": "Software engineer working on GPU performance: ML training and inference optimization, physics simulation, and robot learning.",
+      "knowsAbout": [
+        "GPU performance engineering",
+        "CUDA",
+        "machine learning training optimization",
+        "ML inference optimization",
+        "Mixture-of-Experts training",
+        "physics simulation",
+        "differentiable simulation",
+        "robot learning",
+        "3D reconstruction",
+        "world models"
+      ],
       "sameAs": [
         {{ site.Params.github | jsonify }},
         {{ site.Params.linkedin | jsonify }},
@@ -41,23 +58,85 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": {{ .Title | jsonify }},
-  "description": {{ .Description | jsonify }},
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": {{ .Title | jsonify }},
+      "description": {{ .Description | jsonify }},
+      "url": {{ .Permalink | jsonify }},
+      "datePublished": {{ .Date.Format "2006-01-02" | jsonify }},
+      "dateModified": {{ .Lastmod.Format "2006-01-02" | jsonify }},
+      "image": {{ $og | jsonify }},
+      "wordCount": {{ .WordCount }},
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "author": {
+        "@type": "Person",
+        "@id": {{ printf "%s#person" site.BaseURL | jsonify }},
+        "name": {{ site.Params.author | jsonify }},
+        "url": {{ site.BaseURL | jsonify }}
+      },
+      "publisher": { "@id": {{ printf "%s#person" site.BaseURL | jsonify }} },
+      "mainEntityOfPage": {{ .Permalink | jsonify }}
+      {{- with .Params.anchor_url }},
+      "citation": {{ . | jsonify }}
+      {{- end }}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "home", "item": {{ site.BaseURL | jsonify }} },
+        { "@type": "ListItem", "position": 2, "name": "writing", "item": {{ "blog/" | absURL | jsonify }} },
+        { "@type": "ListItem", "position": 3, "name": {{ .Title | jsonify }}, "item": {{ .Permalink | jsonify }} }
+      ]
+    }
+  ]
+}
+</script>
+{{- else if eq .RelPermalink "/about/" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": { "@id": {{ printf "%s#person" site.BaseURL | jsonify }} },
+  "hasPart": [
+    {
+      "@type": "ScholarlyArticle",
+      "headline": "Prediction of Human Behavior with TOPSIS",
+      "author": [
+        { "@id": {{ printf "%s#person" site.BaseURL | jsonify }} },
+        { "@type": "Person", "name": "Taraneh Javanbakht" }
+      ],
+      "datePublished": "2022",
+      "url": "http://www.journal-fea.com/article_145342.html"
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "headline": "Optimization of Machine Learning Algorithms for Proteomic Analysis Using TOPSIS",
+      "author": [
+        { "@id": {{ printf "%s#person" site.BaseURL | jsonify }} },
+        { "@type": "Person", "name": "Taraneh Javanbakht" }
+      ],
+      "datePublished": "2022",
+      "url": "https://jes.sumdu.edu.ua/optimization-of-machine-learning-algorithms-for-proteomic-analysis-using-topsis/"
+    }
+  ]
+}
+</script>
+{{- else if eq .RelPermalink "/blog/" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": {{ printf "%s — writing" site.Title | jsonify }},
   "url": {{ .Permalink | jsonify }},
-  "datePublished": {{ .Date.Format "2006-01-02" | jsonify }},
-  "dateModified": {{ .Lastmod.Format "2006-01-02" | jsonify }},
-  "image": {{ $og | jsonify }},
-  "author": {
-    "@type": "Person",
-    "name": {{ site.Params.author | jsonify }},
-    "url": {{ site.BaseURL | jsonify }}
-  },
-  "publisher": {
-    "@type": "Person",
-    "name": {{ site.Params.author | jsonify }}
-  },
-  "mainEntityOfPage": {{ .Permalink | jsonify }}
+  "author": { "@id": {{ printf "%s#person" site.BaseURL | jsonify }} },
+  "blogPost": [
+    {{- $posts := (where site.RegularPages "Section" "blog").ByDate.Reverse -}}
+    {{- range $i, $p := first 12 $posts }}{{ if $i }},{{ end }}
+    { "@type": "BlogPosting", "headline": {{ $p.Title | jsonify }}, "url": {{ $p.Permalink | jsonify }}, "datePublished": {{ $p.Date.Format "2006-01-02" | jsonify }} }
+    {{- end }}
+  ]
 }
 </script>
 {{- end }}

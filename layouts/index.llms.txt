@@ -1,0 +1,26 @@
+# {{ site.Title }} — {{ site.Params.author }}
+
+> {{ site.Params.description }} Posts are dated, carry verifiable numbers, and link
+> their public anchors (pull requests, commits, benchmarks) so claims can be checked
+> at the source.
+
+Author: {{ site.Params.author }}
+GitHub: {{ site.Params.github }}
+LinkedIn: {{ site.Params.linkedin }}
+ResearchGate: {{ site.Params.researchgate }}
+Contact: {{ site.Params.email }}
+
+## Writing
+{{ range (where site.RegularPages "Section" "blog").ByDate.Reverse }}
+- [{{ .Title }}]({{ .Permalink }}): {{ .Description }} ({{ .Date.Format "2006-01-02" }}){{ with .Params.anchor }} [anchor: {{ . }}]{{ end }}
+{{- end }}
+
+## Pages
+
+- [About]({{ "about/" | absURL }}): who writes this, publications, profiles.
+
+## Feeds and machine-readable formats
+
+- RSS (full content): {{ "index.xml" | absURL }}
+- Full plain-text of every post: {{ "llms-full.txt" | absURL }}
+- Sitemap: {{ "sitemap.xml" | absURL }}

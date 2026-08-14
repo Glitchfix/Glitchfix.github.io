@@ -9,12 +9,25 @@ disableKinds = ['taxonomy', 'term']
 ID = 'G-GPBS5WVPT5'
 
 [params]
-description = 'Notes by Shivanjan Chakravorty.'
+description = 'Notes by Shivanjan Chakravorty on GPU performance engineering: ML training and inference, physics simulation, and robot learning.'
 author = 'Shivanjan Chakravorty'
 email = 'schakravorty846@gmail.com'
 github = 'https://github.com/Glitchfix'
 linkedin = 'https://www.linkedin.com/in/shivanjan'
 researchgate = 'https://www.researchgate.net/profile/Shivanjan-Chakravorty'
+
+[outputFormats.llms]
+mediaType = 'text/plain'
+baseName = 'llms'
+isPlainText = true
+
+[outputFormats.llmsfull]
+mediaType = 'text/plain'
+baseName = 'llms-full'
+isPlainText = true
+
+[outputs]
+home = ['html', 'rss', 'llms', 'llmsfull']
 
 [permalinks]
 blog = '/blog/:contentbasename/'

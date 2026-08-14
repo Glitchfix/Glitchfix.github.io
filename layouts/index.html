@@ -239,13 +239,319 @@
       }
       return { pts: pts.slice(0,P), edges: edges.filter(function(e){return e[0]<P&&e[1]<P;}), acc: acc };
     }
+    /* ---- imperial dragon: long serpent threading a projected-visible spline,
+            doubling back across the sky, recoiling, then striking the lens ---- */
+    var DRG = new Array(P).fill(null), DPOSE = new Float32Array(P*3);
+    var DXF = 1;                        /* path width factor: fits any aspect */
+    var DK = [ [ 4.1, 1.25,  .0],  [ 2.6,  .45, -.15], [ 1.1, -.42, -.02],
+               [-0.5,  .38, -.15], [-2.1, -.38,  .0],  [-3.6,  .18,  .25],
+               [-3.0,  .72,  .55], [-1.4,  .78,  .7],  [ 0.5,  .55,  .8],
+               [ 1.9,  .05, 1.05], [ 1.0, -.10, 1.9],  [ 0.2, -.10, 2.9],
+               [ 0.05,-.14, 3.25] ];
+    function drgP(q, out) {
+      var n = DK.length-1, a;
+      if (q < 0) {                      /* tail streams in on a straight ribbon */
+        drgP(0, out);
+        var d0 = [DK[1][0]-DK[0][0], DK[1][1]-DK[0][1], DK[1][2]-DK[0][2]];
+        for (a = 0; a < 3; a++) out[a] += d0[a]*q*n*(a===0?DXF:1)*.5;
+        return out;
+      }
+      var seg = Math.max(0, Math.min(n-1, Math.floor(q*n))), t = Math.min(1.15, q*n - seg);
+      var p0 = DK[Math.max(0,seg-1)], p1 = DK[seg], p2 = DK[seg+1], p3 = DK[Math.min(n,seg+2)];
+      var t2 = t*t, t3 = t2*t;
+      for (a = 0; a < 3; a++)
+        out[a] = .5*(2*p1[a] + (p2[a]-p0[a])*t + (2*p0[a]-5*p1[a]+4*p2[a]-p3[a])*t2
+                 + (3*p1[a]-p0[a]-3*p2[a]+p3[a])*t3);
+      out[0] *= DXF;
+      return out;
+    }
+    /* progress keyframes: swoop, float, dive, glide, rise, settle, recoil, strike */
+    var DQK = [ [0,0], [1.0,.13], [2.2,.20], [3.4,.40], [4.4,.47],
+                [5.8,.63], [7.2,.72], [7.9,.695], [9.5,1] ];
+    function drgQ(tD) {
+      var n = DQK.length-1;
+      if (tD <= 0) return 0;
+      if (tD >= DQK[n][0]) return 1;
+      for (var k = 0; k < n; k++) {
+        var a = DQK[k], b = DQK[k+1];
+        if (tD <= b[0]) {
+          var w = (tD-a[0])/(b[0]-a[0]);
+          w = (k === n-1) ? w*w : (1-Math.cos(w*3.1416))/2;   /* strike accelerates */
+          return a[1] + (b[1]-a[1])*w;
+        }
+      }
+      return 1;
+    }
+    var DTA=[0,0,0], DTB=[0,0,0], DTC=[0,0,0];
+    function drgFrame(q, o) {           /* tangent + normals at q -> o[9] */
+      drgP(q+.004, DTA); drgP(q-.004, DTB);
+      var tx = DTA[0]-DTB[0], ty = DTA[1]-DTB[1], tz = DTA[2]-DTB[2];
+      var tl = Math.sqrt(tx*tx+ty*ty+tz*tz)||1; tx/=tl; ty/=tl; tz/=tl;
+      var ax = -tz, az = tx, al = Math.sqrt(ax*ax+az*az)||1; ax/=al; az/=al;
+      o[0]=tx; o[1]=ty; o[2]=tz;
+      o[3]=ax; o[4]=0;  o[5]=az;
+      o[6]=-az*ty; o[7]=az*tx-ax*tz; o[8]=ax*ty;
+    }
+    var HF = new Float32Array(9), BF = new Float32Array(9);
+    var DLAG = .30, DHS = 1.2;          /* body length on path; head scale */
+    function poseDragon(tD) {
+      var qh = drgQ(tD);
+      var rush = Math.max(0, Math.min(1, (qh-.72)/.28));
+      var snarl = (tD > 7.2 && tD < 7.9) ? Math.sin((tD-7.2)/.7*3.1416)*.30 : 0;
+      var open = .07 + .04*Math.sin(tD*2.1) + snarl + 1.2*rush*rush;
+      var co = Math.cos(open), so = Math.sin(open);
+      var cu = Math.cos(open*.42), su = Math.sin(open*.42);
+      var damp = 1 - .7*rush;
+      drgFrame(qh, HF);
+      var strike = rush*.30;            /* nose-up as it rears at the lens */
+      var cs = Math.cos(strike), ss = Math.sin(strike);
+      var fx = HF[0]*cs + HF[6]*ss, fy = HF[1]*cs + HF[7]*ss, fz = HF[2]*cs + HF[8]*ss;
+      var ux = HF[6]*cs - HF[0]*ss, uy = HF[7]*cs - HF[1]*ss, uz = HF[8]*cs - HF[2]*ss;
+      var rxv = HF[3], ryv = HF[4], rzv = HF[5];
+      drgP(qh, DTC);
+      var hx0 = DTC[0], hy0 = DTC[1] + Math.sin(tD*1.3)*.02*damp, hz0 = DTC[2];
+      for (var i = 0; i < P; i++) {
+        var d = DRG[i]; if (!d) continue;
+        var X, Yv, Z, lx, ly, lz;
+        if (d.p === 0 || d.p === 5) {          /* body ring, crest thorn, or leg */
+          var qi = qh - d.s*DLAG;
+          drgFrame(qi, BF); drgP(qi, DTC);
+          /* big slow wave crawling tailward + buoyant lift: the ghibli swim */
+          var amp = (.24*d.s + .05*Math.min(1, d.s*4))*damp;
+          var tau = qi*5.5 - tD*1.9;
+          var wY = Math.sin(tau)*amp, wX = Math.cos(tau*.8 + .9)*amp*.45;
+          var lift = Math.sin(tD*1.05 + qi*2)*.04*damp;
+          var cxp = DTC[0]+BF[3]*wX+BF[6]*wY, cyp = DTC[1]+BF[7]*wY+lift,
+              czp = DTC[2]+BF[5]*wX+BF[8]*wY;
+          /* bank into the turn: roll rings by tangent yaw-rate */
+          drgP(qi+.02, DTA); drgP(qi-.02, DTB);
+          var h1x = DTA[0]-DTB[0], h1z = DTA[2]-DTB[2];
+          var bank = Math.max(-.55, Math.min(.55, (BF[0]*h1z - BF[2]*h1x)*-14));
+          if (d.p === 0) {
+            var an = d.a + bank;
+            var cr = Math.cos(an)*d.r, sr = Math.sin(an)*d.r;
+            X = cxp + BF[3]*cr + BF[6]*sr;
+            Yv = cyp + BF[4]*cr + BF[7]*sr;
+            Z = czp + BF[5]*cr + BF[8]*sr;
+            if (d.rk) {                         /* crest thorn rakes backward */
+              X -= BF[0]*.055*d.rk; Yv -= BF[1]*.055*d.rk; Z -= BF[2]*.055*d.rk;
+            }
+          } else {                              /* leg folded back under */
+            var lgx = -d.k*.06 - .02, lgy = -d.r - d.k*.068, lgz = d.sd*(d.r*.9 + d.k*.014);
+            X = cxp + BF[0]*lgx + BF[6]*lgy + BF[3]*lgz;
+            Yv = cyp + BF[1]*lgx + BF[7]*lgy + BF[4]*lgz;
+            Z = czp + BF[2]*lgx + BF[8]*lgy + BF[5]*lgz;
+          }
+        } else {                                /* head family */
+          lx = d.x; ly = d.y; lz = d.z;
+          if (d.p === 2 || d.p === 7) {         /* lower jaw + tongue drop */
+            if (d.p === 7) {                    /* tongue flicks with the strike */
+              lx = .40 + d.k*.085*(.25 + rush);
+              ly = -.028 - d.k*.004;
+              lz = d.z + Math.sin(tD*5.5 + d.k)*.010*d.k*rush;
+            }
+            var rx = lx-.28; lx = .28 + rx*co + ly*so; ly = -rx*so + ly*co;
+          }
+          else if (d.p === 3) { var rx2 = lx-.28; lx = .28 + rx2*cu - ly*su; ly = rx2*su + ly*cu; }
+          else if (d.p === 4) {                 /* whisker: long trailing sway */
+            lx = .60 - d.k*.062;
+            lz = d.sd*(.065 + d.k*.024 + Math.sin(d.k*.42 + tD*1.0)*.012*d.k);
+            ly = -.02 + Math.sin(d.k*.5 + tD*1.4 + d.sd)*.010*d.k - d.k*.005;
+          }
+          else if (d.p === 6) {                 /* mane streamer flutter */
+            lx = d.x - d.k*.07;
+            ly = d.y*(1 + d.k*.6) + Math.sin(tD*2.2 + d.ph)*.022*d.k;
+            lz = d.z*(1 + d.k*.6) + Math.cos(tD*1.8 + d.ph*1.7)*.022*d.k;
+          }
+          lx *= DHS; ly *= DHS; lz *= DHS;
+          X  = hx0 + fx*lx + ux*ly + rxv*lz;
+          Yv = hy0 + fy*lx + uy*ly + ryv*lz;
+          Z  = hz0 + fz*lx + uz*ly + rzv*lz;
+        }
+        DPOSE[i*3] = X + d.jx; DPOSE[i*3+1] = Yv + d.jy; DPOSE[i*3+2] = Z + d.jz;
+      }
+    }
+    function dragon() {
+      var pts = [], edges = [], acc = [];
+      function pushD(m) { m.jx = m.jx||0; m.jy = m.jy||0; m.jz = m.jz||0;
+                          DRG[pts.length] = m; pts.push([0,0,0]); }
+      var NR = 72, NS = 10, i, j;
+      function bodyR(s) { return .165*(1-.60*s)*(1+.18*Math.sin(s*3.1416)); }
+      for (i = 0; i < NR; i++) {                  /* body tube */
+        var s = i/(NR-1);
+        var r = bodyR(s)*(.90+.10*Math.abs(Math.sin(s*52)));
+        for (j = 0; j < NS; j++) {
+          pushD({p:0, s:s, a:j/NS*6.2832, r:r});
+          if (i && j%2===0) edges.push([(i-1)*NS+j, i*NS+j, .5]);
+          if (i%2===0 && j) edges.push([i*NS+j-1, i*NS+j, .3]);
+        }
+        if (i%2===0) edges.push([i*NS+NS-1, i*NS, .3]);
+        if (i >= 4 && i%4 === 0)                  /* scale cross-hatch */
+          for (j = 0; j < NS; j += 2) {
+            edges.push([(i-4)*NS+j, i*NS+((j+1)%NS), .22]);
+            edges.push([(i-4)*NS+((j+2)%NS), i*NS+((j+1)%NS), .22]);
+          }
+      }
+      var prevTip = -1;                           /* crest: raked two-joint thorns */
+      for (i = 2; i < 68; i += 2) {
+        var sC = i/(NR-1), rC = bodyR(sC);
+        var hgt = .14*(1-.35*sC);
+        pushD({p:0, s:sC, a:1.5708, r:rC + hgt*.5, rk:.5});
+        var mid = pts.length-1;
+        pushD({p:0, s:sC, a:1.5708, r:rC + hgt, rk:1});
+        var tip = pts.length-1;
+        edges.push([i*NS+3, mid, .55]); edges.push([mid, tip, .5]);
+        if (prevTip >= 0) edges.push([prevTip, tip, .35]);
+        prevTip = tip;
+      }
+      [.18, .52].forEach(function (sL) {          /* two leg pairs, folded */
+        [1, -1].forEach(function (sd) {
+          var base = pts.length;
+          for (var k = 0; k < 4; k++) {
+            pushD({p:5, s:sL, sd:sd, k:k, r:bodyR(sL)});
+            if (k) edges.push([pts.length-2, pts.length-1, .5]);
+          }
+          for (var c = -1; c <= 1; c++) {         /* three claws */
+            pushD({p:5, s:sL, sd:sd, k:4.8, r:bodyR(sL), jz:c*.024});
+            edges.push([base+3, pts.length-1, .45]);
+          }
+        });
+      });
+      /* -- head: rails + ribs, hinge at lx=.28 -- */
+      var CRN = [], SDT = [[],[]], LIP = [[],[]], CHL = [[],[]], CHC = [];
+      var CX = [-.06, .08, .2, .34, .48, .60];
+      var CY = [ .15, .20, .155, .14, .115, .085];
+      for (i = 0; i < 6; i++) { pushD({p:3, x:CX[i], y:CY[i], z:0}); CRN.push(pts.length-1);
+        if (i) edges.push([pts.length-2, pts.length-1, .6]); }
+      [1,-1].forEach(function (sd, si) {          /* side-top rails */
+        for (i = 0; i < 6; i++) {
+          pushD({p:3, x:CX[i]+.01, y:CY[i]-.055, z:sd*(.085-.008*i)});
+          SDT[si].push(pts.length-1);
+          if (i) edges.push([SDT[si][i-1], SDT[si][i], .5]);
+          edges.push([CRN[i], SDT[si][i], .3]);
+        }
+      });
+      [1,-1].forEach(function (sd, si) {          /* upper lip rail + fangs */
+        for (i = 0; i < 6; i++) {
+          var lxL = .30 + i*.062;
+          pushD({p:3, x:lxL, y:.018 - i*.004, z:sd*(.075-.006*i)});
+          LIP[si].push(pts.length-1);
+          if (i) edges.push([LIP[si][i-1], LIP[si][i], .6]);
+          if (i) { pushD({p:3, x:lxL-.03, y:-.028, z:sd*(.07-.006*i)});
+            edges.push([LIP[si][i-1], pts.length-1, .5]); edges.push([pts.length-1, LIP[si][i], .5]); }
+        }
+        edges.push([SDT[si][5], LIP[si][5], .5]);
+        edges.push([SDT[si][2], LIP[si][0], .4]);
+      });
+      [1,-1].forEach(function (sd, si) {          /* lower jaw rail + fangs */
+        for (i = 0; i < 6; i++) {
+          var lxL = .29 + i*.055;
+          pushD({p:2, x:lxL, y:-.03 - i*.007, z:sd*(.06-.006*i)});
+          CHL[si].push(pts.length-1);
+          if (i) edges.push([CHL[si][i-1], CHL[si][i], .6]);
+          if (i && i < 5) { pushD({p:2, x:lxL-.026, y:.014, z:sd*(.056-.006*i)});
+            edges.push([CHL[si][i-1], pts.length-1, .5]); edges.push([pts.length-1, CHL[si][i], .5]); }
+        }
+      });
+      for (i = 0; i < 5; i++) {                   /* chin center rail */
+        pushD({p:2, x:.30+i*.062, y:-.078-i*.004, z:0});
+        CHC.push(pts.length-1);
+        if (i) edges.push([CHC[i-1], CHC[i], .5]);
+        edges.push([CHL[0][i], CHC[i], .3]);
+        edges.push([CHL[1][i], CHC[i], .3]);
+      }
+      edges.push([CHL[0][5], CHC[4], .5]);
+      edges.push([CHL[1][5], CHC[4], .5]);
+      var TNG = pts.length;                       /* forked tongue */
+      for (i = 0; i < 4; i++) { pushD({p:7, x:0, y:0, z:0, k:i});
+        if (i) edges.push([pts.length-2, pts.length-1, .5]); }
+      pushD({p:7, x:0, y:0, z:.016, k:3.7}); edges.push([TNG+3, pts.length-1, .45]);
+      pushD({p:7, x:0, y:0, z:-.016, k:3.7}); edges.push([TNG+3, pts.length-1, .45]);
+      [1,-1].forEach(function (sd) {              /* brow ridge + ember eye */
+        var b0 = -1;
+        for (i = 0; i < 3; i++) {
+          pushD({p:3, x:.16+i*.05, y:.125+((i===1)?.022:0), z:sd*.098});
+          if (i) edges.push([pts.length-2, pts.length-1, .6]);
+        }
+        pushD({p:3, x:.22, y:.088, z:sd*.104}); acc.push(pts.length-1);
+        pushD({p:3, x:.245, y:.092, z:sd*.100}); acc.push(pts.length-1);
+      });
+      [1,-1].forEach(function (sd) {              /* nostril curls */
+        pushD({p:3, x:.585, y:.055, z:sd*.045});
+        pushD({p:3, x:.615, y:.078, z:sd*.032});
+        edges.push([pts.length-2, pts.length-1, .4]);
+        edges.push([CRN[5], pts.length-2, .35]);
+      });
+      pushD({p:3, x:.02, y:.235, z:0});           /* forehead horn nub */
+      edges.push([CRN[1], pts.length-1, .5]);
+      function horn(sd) {                         /* long swept antler, two forks */
+        var main = [];
+        for (var k = 0; k < 10; k++) {
+          pushD({p:3, x:.10-k*.066-k*k*.003, y:.17+k*.055-k*k*.0032, z:sd*(.05+k*.017)});
+          main.push(pts.length-1);
+          if (k) edges.push([main[k-1], main[k], .6]);
+        }
+        var prev = main[3];
+        for (k = 1; k < 5; k++) {
+          pushD({p:3, x:-.12-k*.045, y:.31+k*.045-k*k*.004, z:sd*(.10+k*.007)});
+          edges.push([prev, pts.length-1, .5]); prev = pts.length-1;
+        }
+        prev = main[6];
+        for (k = 1; k < 4; k++) {
+          pushD({p:3, x:-.33-k*.04, y:.42+k*.03-k*k*.005, z:sd*(.15+k*.006)});
+          edges.push([prev, pts.length-1, .45]); prev = pts.length-1;
+        }
+      }
+      horn(1); horn(-1);
+      [1,-1].forEach(function (sd) {              /* cheek fin fans */
+        for (var f = 0; f < 3; f++) {
+          var ang = -.5 + f*.5, b2 = -1;
+          for (var k = 0; k < 2; k++) {
+            pushD({p:3, x:.14 - k*.09 - f*.02, y:.02 + Math.sin(ang)*.06*(k+1),
+                   z:sd*(.10 + k*.075)});
+            if (k) edges.push([pts.length-2, pts.length-1, .5]);
+            else { b2 = pts.length-1; edges.push([SDT[sd>0?0:1][1], b2, .35]); }
+          }
+        }
+      });
+      for (var st = 0; st < 11; st++) {           /* mane: streamers off the crown */
+        var aM = (st/11)*3.1416*2, prevM = -1;
+        var by0 = Math.cos(aM)*.15, bz0 = Math.sin(aM)*.16;
+        if (by0 < -.05) continue;
+        for (var k4 = 0; k4 < 4; k4++) {
+          pushD({p:6, x:-.05, y:by0, z:bz0, k:k4, ph:st*1.7});
+          if (prevM >= 0) edges.push([prevM, pts.length-1, .45]);
+          prevM = pts.length-1;
+        }
+      }
+      function whisk(sd) {
+        var prev = -1;
+        for (var k5 = 0; k5 < 16; k5++) {
+          pushD({p:4, k:k5, sd:sd, x:0, y:0, z:0});
+          if (k5) edges.push([prev, pts.length-1, .5]);
+          prev = pts.length-1;
+        }
+      }
+      whisk(1); whisk(-1);
+      var structN = pts.length, dup = 0;
+      while (pts.length < P) {
+        var src = DRG[dup % structN]; dup++;
+        pushD({p:src.p, s:src.s, a:src.a, r:src.r, x:src.x, y:src.y, z:src.z,
+               k:src.k, sd:src.sd, ph:src.ph, rk:src.rk,
+               jx:(hash(dup)-.5)*.04, jy:(hash(dup+3)-.5)*.04, jz:(hash(dup+11)-.5)*.04});
+      }
+      poseDragon(0);                              /* entry pose = the morph target */
+      for (i = 0; i < P; i++) pts[i] = [DPOSE[i*3], DPOSE[i*3+1], DPOSE[i*3+2]];
+      return { pts: pts, edges: edges, acc: acc };
+    }
+
     var VOID = { pts: [], edges: [], acc: [] };
     for (var vi = 0; vi < P; vi++)
       VOID.pts.push([(hash(vi)-.5)*4.4, (hash(vi+7)-.5)*4.4, (hash(vi+13)-.5)*4.4]);
 
     var S_LAT = lattice(), S_SHP = shapesInLattice(), S_ROOMF = roomScene(),
-        S_SPH = sphere(), S_FLY = dragonfly();
-    [S_LAT,S_SHP,S_ROOMF,S_SPH,S_FLY].forEach(function (S) {
+        S_SPH = sphere(), S_FLY = dragonfly(), S_DRG = dragon();
+    [S_LAT,S_SHP,S_ROOMF,S_SPH,S_FLY,S_DRG].forEach(function (S) {
       while (S.pts.length < P) S.pts.push([0,0,0]);
       S.pts = S.pts.slice(0, P);
     });
@@ -262,13 +568,14 @@
       { s: S_ROOMF,hold: 6.0, morph: 1.5, ease: outBack  },
       { s: S_SPH,  hold: 3.0, morph: 1.8, ease: outQuart },
       { s: S_FLY,  hold: 5.6, morph: 1.0, ease: outExpo  },
-      { s: VOID,   hold: .6,  morph: 0,   ease: outExpo  }
+      { s: S_DRG,  hold: 9.5, morph: 1.2, ease: outQuart },
+      { s: VOID,   hold: .5,  morph: 0,   ease: outExpo  }
     ];
     var TOTAL = 0; TL.forEach(function (e) { TOTAL += e.hold + e.morph; });
-    var LIDAR_IX = 4, FLY_IX = 6;
+    var LIDAR_IX = 4, FLY_IX = 6, DRG_IX = 7, DRG_HOLD = 9.5;
     var HEAT = new Float32Array(P);
     var RING_PERIOD = 1.15, RING_SPEED = 1.15, RING_LIFE = 2.6;
-    var yawAcc = 0, yawRate = .06;
+    var yawAcc = 0, yawRate = .06, pitS = 1;
 
     var sy=0,sp=0,vy2=0,vp2=0,ty=0,tp=0,K=42,D2=2*Math.sqrt(K)*.85;
     addEventListener('pointermove', function (e) {
@@ -294,20 +601,26 @@
       var A = TL[ix].s, B = TL[(ix+1)%TL.length].s, EASE = TL[ix].ease;
       var isLidar = (ix === LIDAR_IX);
       var isFly = (ix===FLY_IX && !inMorph);
+      var isDrg = (ix===DRG_IX && !inMorph);
+      var flyEnd = (inMorph && A === S_FLY);
+      DXF = Math.max(.35, Math.min(1, CW/(Math.min(CW,CH)*.8)/5.2));
+      if (isDrg) poseDragon(holdT);
+      else if (inMorph && A === S_DRG) poseDragon(DRG_HOLD);
 
       var targetRate = isLidar ? .025 : (ix === 5 ? .16 : (ix >= FLY_IX ? 0 : .06));
       yawRate += (targetRate - yawRate) * Math.min(1, dt*1.5);
       yawAcc += yawRate * dt;
+      pitS += ((ix === DRG_IX ? .10 : 1) - pitS) * Math.min(1, dt*1.8);
 
       vy2 += (K*(ty-sy)-D2*vy2)*dt; sy += vy2*dt;
       vp2 += (K*(tp-sp)-D2*vp2)*dt; sp += vp2*dt;
-      var Y = yawAcc + sy;
-      var Pit = .30 + .07*Math.sin(now/13000) + sp;
+      var Y = yawAcc + sy*pitS;
+      var Pit = (.30 + .07*Math.sin(now/13000) + sp)*pitS;
       var cosY=Math.cos(Y),sinY=Math.sin(Y),cosP=Math.cos(Pit),sinP=Math.sin(Pit);
       var R = Math.min(CW, CH)*.40, cx = CW/2, cy = CH/2;
 
-      var flyU = isFly ? Math.max(0,(holdT-2.2)/2.6) : 0;
-      var dart = isFly ? Math.max(0, Math.min(1, (holdT-1.5)/.35)) : 0;
+      var flyU = isFly ? Math.max(0,(holdT-2.2)/2.6) : (flyEnd ? 1 : 0);
+      var dart = isFly ? Math.max(0, Math.min(1, (holdT-1.5)/.35)) : (flyEnd ? 1 : 0);
       var climb = inOutQuad(flyU);
       var beatHz = 12 + 6*flyU + 4*dart;
       var beat = 6.2832*(now/1000)*beatHz;
@@ -334,19 +647,39 @@
           py2 = a2[1] + (fy - a2[1]) * e2;
           pz2 = a2[2] + (fz - a2[2]) * e2;
         }
-        if (isFly) {
+        if (isFly || flyEnd) {
+          var fpx = a2[0], fpy = a2[1], fpz = a2[2];
           if (wg) {
             var th3 = wg.fore ? thF : thH;
-            py2 = wg.rY + wg.L*Math.sin(th3);
-            pz2 = wg.rZ + wg.side*wg.L*Math.cos(th3);
-            px2 = a2[0];
-          } else py2 += bob;
-          var ry0 = py2, rz0 = pz2;
-          py2 = ry0*Math.cos(bank) - rz0*Math.sin(bank);
-          pz2 = ry0*Math.sin(bank) + rz0*Math.cos(bank);
-          px2 = .3 + (px2-.3)*scaleF + pathX;
-          py2 = py2*scaleF + pathY;
-          pz2 = pz2*scaleF + pathZ;
+            fpy = wg.rY + wg.L*Math.sin(th3);
+            fpz = wg.rZ + wg.side*wg.L*Math.cos(th3);
+          } else fpy += bob;
+          var ry0 = fpy, rz0 = fpz;
+          fpy = ry0*Math.cos(bank) - rz0*Math.sin(bank);
+          fpz = ry0*Math.sin(bank) + rz0*Math.cos(bank);
+          fpx = .3 + (fpx-.3)*scaleF + pathX;
+          fpy = fpy*scaleF + pathY;
+          fpz = fpz*scaleF + pathZ;
+          if (flyEnd) {                      /* frozen exit pose hands off to the dragon */
+            var bx2 = b2[0]*cosY - b2[2]*sinY, bz2 = b2[0]*sinY + b2[2]*cosY;
+            px2 = fpx + (bx2-fpx)*e2;
+            py2 = fpy + (b2[1]-fpy)*e2;
+            pz2 = fpz + (bz2-fpz)*e2;
+          } else { px2 = fpx; py2 = fpy; pz2 = fpz; }
+        }
+        /* dragon is CAMERA-composed: counter-rotate by scene yaw so the
+           pipeline's rotation cancels and the strike faces the viewer */
+        if (isDrg && DRG[i2]) {
+          var ddx = DPOSE[i2*3], ddz = DPOSE[i2*3+2];
+          px2 = ddx*cosY - ddz*sinY; py2 = DPOSE[i2*3+1]; pz2 = ddx*sinY + ddz*cosY;
+        }
+        if (inMorph && A === S_DRG && DRG[i2]) { /* lunge pose dissolves to dust */
+          var dxp0 = DPOSE[i2*3], dzp0 = DPOSE[i2*3+2];
+          var dxp = dxp0*cosY - dzp0*sinY, dyp = DPOSE[i2*3+1],
+              dzp = dxp0*sinY + dzp0*cosY;
+          px2 = dxp + (b2[0]-dxp)*e2;
+          py2 = dyp + (b2[1]-dyp)*e2;
+          pz2 = dzp + (b2[2]-dzp)*e2;
         }
         if (isLidar && !inMorph) {
           var dx2 = px2 - SCAN_POS[0], dz2 = pz2 - SCAN_POS[2];
@@ -362,21 +695,23 @@
         HEAT[i2] *= Math.exp(-dt*1.6);
         var x1 = px2*cosY + pz2*sinY, z1 = -px2*sinY + pz2*cosY;
         var y2b = py2*cosP - z1*sinP, z2b = py2*sinP + z1*cosP;
-        var f2 = 3.2/(3.2 - z2b*.85);
+        var f2 = 3.2/Math.max(.30, 3.2 - z2b*.85);   /* clamp past the lens */
         proj[i2] = [cx + x1*R*f2, cy - y2b*R*f2];
-        depth[i2] = z2b;
+        depth[i2] = Math.min(2.2, z2b);
       }
       x.clearRect(0,0,CW,CH); x.lineCap='round';
-      var fadeAll = isFly ? Math.max(0, 1-Math.max(0,(holdT-4.6)/1.0)) : 1;
+      var fadeAll = isFly ? Math.max(0, 1-Math.max(0,(holdT-4.6)/1.0))
+                          : (flyEnd ? Math.min(1, u*1.5) : 1);
       var edgeDim = (isLidar && !inMorph) ? .35 : 1;
+      var drgBoost = (isDrg || (inMorph && (A===S_DRG || B===S_DRG))) ? 1.7 : 1;
 
       function drawEdges(S, alphaMul) {
         if (alphaMul <= .01) return;
         for (var e3 = 0; e3 < S.edges.length; e3++) {
           var ed = S.edges[e3], a3 = proj[ed[0]], b3 = proj[ed[1]];
           var dq = ((depth[ed[0]]+depth[ed[1]])/2+1)/2;
-          x.globalAlpha = (0.05+.45*dq*dq)*ed[2]*alphaMul*fadeAll*edgeDim;
-          x.lineWidth = .5+.75*dq;
+          x.globalAlpha = Math.min(1, (0.05+.45*dq*dq)*ed[2]*alphaMul*fadeAll*edgeDim*drgBoost);
+          x.lineWidth = (drgBoost>1 ? .7 : .5)+.75*Math.min(2, dq);
           x.strokeStyle = ink;
           x.beginPath(); x.moveTo(a3[0],a3[1]); x.lineTo(b3[0],b3[1]); x.stroke();
         }
@@ -417,7 +752,7 @@
         var isSurf = (A === S_ROOMF) && i2 >= SURF_START;
         var base2 = (isLidar && !inMorph) ? (isSurf ? .05+.22*dq2*dq2 : .04+.18*dq2*dq2)
                     : (isSurf ? .04+.16*dq2*dq2 : .08+.45*dq2*dq2);
-        var al = (isAcc ? .3+.7*dq2 : base2) + h*.95;
+        var al = ((isAcc ? .3+.7*dq2 : base2) + h*.95)*drgBoost;
         x.globalAlpha = Math.min(1, al)*fadeAll;
         x.fillStyle = (isAcc || h > .3) ? accent : ink;
         if (isAcc) {
