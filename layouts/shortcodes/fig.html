@@ -4,7 +4,8 @@
 <figure class="manim">
   <div class="frame">
     {{- if strings.HasSuffix $src ".mp4" -}}
-    <video autoplay loop muted playsinline preload="metadata" aria-label="{{ .Get "alt" }}">
+    {{- $poster := .Page.Resources.GetMatch (replace $src ".mp4" "-poster.jpg") -}}
+    <video autoplay loop muted playsinline preload="metadata"{{ with $poster }} poster="{{ .RelPermalink }}"{{ end }} aria-label="{{ .Get "alt" }}">
       <source src="{{ $url }}" type="video/mp4">
     </video>
     {{- else -}}

@@ -1,11 +1,16 @@
 ---
 title: "96 is enough: shrinking attention's routing vectors"
 date: 2026-07-24T09:38:00+08:00
+lastmod: 2026-10-16
 description: "Q and K decide where to look; V carries what's found. They don't need the same width."
 figures: 1
-anchor: "modded-nanogpt PR #344"
+anchor: "modded-nanogpt #344, merged"
 anchor_url: "https://github.com/KellerJordan/modded-nanogpt/pull/344"
 ---
+
+*October update: the later revision of this submission was
+[accepted as record #90](/blog/the-last-twenty-steps/) on 18 September, at 68.0 seconds.
+This post describes the original July experiment.*
 
 The [modded-nanogpt speedrun](https://github.com/KellerJordan/modded-nanogpt) is the best
 benchmark culture in open ML: one task, one target loss, wall-clock time on 8xH100, and every
